@@ -46,15 +46,17 @@ class ItemListFragment : Fragment() {
     ): View? {
         _binding = ItemListFragmentBinding.inflate(inflater, container, false)
 
-
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
-        val itemListAdapter = ItemListAdapter(this.layoutInflater)
+        val itemListAdapter = ItemListAdapter {
+            // 람다를 생성자 매개변수로 넘김...
+            val action = ItemListFragmentDirections.actionItemListFragmentToItemDetailFragment(it.id)
+            this.findNavController().navigate(action)
+        }
         binding.recyclerView.adapter = itemListAdapter
 
         viewModel.allItems.observe(viewLifecycleOwner, Observer {
