@@ -60,7 +60,7 @@ class OrderViewModel : ViewModel() {
     private fun getPickupOptions(): List<String> {
         val options = mutableListOf<String>()
 
-        val formatter = SimpleDateFormat("MMM d E", Locale.getDefault())
+        val formatter = SimpleDateFormat("E MMM d", Locale.getDefault())
         val calendar = Calendar.getInstance()
         repeat(4) {
             options.add(formatter.format(calendar.time))
@@ -86,9 +86,9 @@ class OrderViewModel : ViewModel() {
         var calculatedPrice = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
         if (dateOptions[0] == _date.value) {
             calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
-            Log.i(TAG, "calculatedPrice : ${calculatedPrice.toString()}")
-            Log.i(TAG, "dateOptions[0] : ${dateOptions[0].toString()}")
-            Log.i(TAG, "_date.value : ${_date.value.toString()}")
+//            Log.i(TAG, "calculatedPrice : ${calculatedPrice.toString()}")
+//            Log.i(TAG, "dateOptions[0] : ${dateOptions[0].toString()}")
+//            Log.i(TAG, "_date.value : ${_date.value.toString()}")
         }
         _price.value = calculatedPrice
     }
