@@ -17,6 +17,7 @@ package com.example.cupcake
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 
@@ -24,12 +25,21 @@ import androidx.navigation.ui.setupActionBarWithNavController
  * Activity for cupcake order flow.
  */
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
+
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
 
         setupActionBarWithNavController(navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        // 앱에서 위로 이동을 처리하도록 navController에 요청합니다.
+        // 그러지 않으면 Up 버튼을 처리하는 슈퍼클래스 구현(AppCompatActivity)으로 대체됩니다.
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
