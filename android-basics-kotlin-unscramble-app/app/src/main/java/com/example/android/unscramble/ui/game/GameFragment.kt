@@ -39,7 +39,6 @@ class GameFragment : Fragment() {
     // private val viewModel = GameViewModel()
 
     // 기기에서 구성이 변경되는 동안 앱이 viewModel 참조의 상태를 손실하게 됩니다.
-    //
     // 예를 들어 기기를 회전하면 활동이 소멸된 후 다시 생성되고 초기 상태의 새로운 뷰 모델 인스턴스가 다시 시작됩니다.
     // 대신 속성 위임 접근 방식을 사용해 viewModel 객체의 책임을 viewModels라는 별도의 클래스에 위임합니다.
     // 즉, viewModel 객체에 액세스하면 이 객체는 대리자 클래스 viewModels에 의해 내부적으로 처리됩니다.
@@ -50,14 +49,12 @@ class GameFragment : Fragment() {
 //    private var currentWordCount = 0
 //    private var currentScrambledWord = "test"
 
-
     // Binding object instance with access to the views in the game_fragment.xml layout
     private lateinit var binding: GameFragmentBinding
 
     // Create a ViewModel the first time the fragment is created.
     // If the fragment is re-created, it receives the same GameViewModel instance created by the
     // first fragment
-
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -78,7 +75,6 @@ class GameFragment : Fragment() {
 //        super.onDetach()
 //        Log.d("GameFragment", "GameFragment destroyed!")
 //    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -172,7 +168,6 @@ class GameFragment : Fragment() {
 //        tempWord.shuffle()
 //        return String(tempWord)
 //    }
-
     private fun showFinalScoreDialog() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.congratulations))

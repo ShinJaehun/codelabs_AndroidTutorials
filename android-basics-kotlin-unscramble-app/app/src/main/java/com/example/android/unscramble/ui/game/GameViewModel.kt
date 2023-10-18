@@ -20,7 +20,8 @@ class GameViewModel : ViewModel() {
     private val _currentScrambledWord = MutableLiveData<String>()
     // 같은 원리로 씨발 이 새끼도 init{} 보다 밑에 있으면 null object refernece 발생
     // object의 value는 동일하게 유지되고 object에 저장된 데이터만 변경됨!
-    val currentScrambledWord: LiveData<String>
+    // 그래서 var가 아니라 val로 바뀌어야 한데...
+    val currentScrambledWord: LiveData<String> // 지원필드 currentScrambledWord는 변경불가이기 때문에 LiveData<String>
         get() = _currentScrambledWord
 
     private val _score = MutableLiveData(0)
@@ -44,6 +45,7 @@ class GameViewModel : ViewModel() {
         tempWord.shuffle()
 
         while (String(tempWord).equals(currentWord, false)) {
+            // shuffle() 했는데 순서를 바꾸지 않은 원래 단어와 동일하면 한번 더 하시구요...
             tempWord.shuffle()
         }
 
@@ -51,6 +53,7 @@ class GameViewModel : ViewModel() {
 //        Log.i(TAG, "tempWord: ${String(tempWord)}")
 
         if (wordsList.contains(currentWord)) { // 계속 여기서 null object reference... 발생
+            // 이미 사용했던 단어라면
             getNextWord()
         } else {
 //            _currentScrambledWord = String(tempWord)
@@ -72,10 +75,10 @@ class GameViewModel : ViewModel() {
     }
 
     fun isUserWordCorrect(playerWord: String) : Boolean {
-        if (playerWord.equals(currentWord, true)) {
+        return if (playerWord.equals(currentWord, true)) {
             increaseScore()
-            return true
-        } else return false
+            true
+        } else false
     }
 
     fun nextWord(): Boolean {
